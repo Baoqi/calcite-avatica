@@ -35,6 +35,7 @@ import org.apache.calcite.avatica.proto.Common;
 import org.apache.calcite.avatica.proto.Requests;
 import org.apache.calcite.avatica.remote.ProtobufMeta;
 import org.apache.calcite.avatica.remote.TypedValue;
+import org.apache.calcite.avatica.util.DateTimeUtils;
 import org.apache.calcite.avatica.util.Unsafe;
 
 import com.google.common.base.Optional;
@@ -89,6 +90,7 @@ public class JdbcMeta implements ProtobufMeta {
   // End of constants, start of member variables
 
   final Calendar calendar = Unsafe.localCalendar();
+  final Calendar utcCalendar = DateTimeUtils.calendar();
 
   /** Generates ids for statements. The ids are unique across all connections
    * created by this JdbcMeta. */
@@ -823,7 +825,7 @@ public class JdbcMeta implements ProtobufMeta {
         return Frame.EMPTY;
       } else {
         return JdbcResultSet.frame(statementInfo, statementInfo.getResultSet(), offset,
-            fetchMaxRowCount, calendar, Optional.<Meta.Signature>absent());
+            fetchMaxRowCount, utcCalendar, Optional.<Meta.Signature>absent());
       }
     } catch (SQLException e) {
       throw propagate(e);
