@@ -115,8 +115,8 @@ public interface Service {
   /** Base class for all service request messages. */
   @JsonTypeInfo(
       use = JsonTypeInfo.Id.NAME,
-      property = "request",
-      defaultImpl = SchemasRequest.class)
+      include = JsonTypeInfo.As.PROPERTY,
+      property = "request")
   @JsonSubTypes({
       @JsonSubTypes.Type(value = CatalogsRequest.class, name = "getCatalogs"),
       @JsonSubTypes.Type(value = SchemasRequest.class, name = "getSchemas"),
@@ -154,8 +154,8 @@ public interface Service {
   /** Base class for all service response messages. */
   @JsonTypeInfo(
       use = JsonTypeInfo.Id.NAME,
-      property = "response",
-      defaultImpl = ResultSetResponse.class)
+      include = JsonTypeInfo.As.PROPERTY,
+      property = "response")
   @JsonSubTypes({
       @JsonSubTypes.Type(value = OpenConnectionResponse.class, name = "openConnection"),
       @JsonSubTypes.Type(value = ResultSetResponse.class, name = "resultSet"),
