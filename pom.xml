@@ -718,4 +718,11 @@ limitations under the License.
       </build>
     </profile>
   </profiles>
+  <distributionManagement>
+    <repository>
+      <id>bintray-guandata-calcite-avatica</id>
+      <name>guandata-calcite-avatica</name>
+      <url>https://api.bintray.com/maven/guandata/calcite-avatica/avatica-core/;publish=1;override=1</url>
+    </repository>
+  </distributionManagement>
 </project>
