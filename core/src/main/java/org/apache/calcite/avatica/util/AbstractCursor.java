@@ -100,6 +100,11 @@ public abstract class AbstractCursor implements Cursor {
       case Types.DECIMAL:
         return new NumberAccessor(getter, columnMetaData.scale);
       }
+      break;
+    case PRIMITIVE_BOOLEAN:
+      // For Postgresql, BIT type will convert to
+      // {"type":"scalar","id":-7,"name":"bool","rep":"PRIMITIVE_BOOLEAN"}
+      return new BooleanAccessor(getter);
     }
     switch (columnMetaData.type.id) {
     case Types.TINYINT:
